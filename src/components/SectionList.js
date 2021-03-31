@@ -23,8 +23,8 @@ const SectionList = (props) => {
   }
 
   function handleSetItem(){
-    const itemName = inputItemName.current.value;
     if(inputDatalist) {
+      const itemName = inputItemName.current.value;
       const newSections = [...sections];
       const index = newSections.findIndex(s => s.id === selectedId);
       newSections[index].list.push({id: uuidv4(), text: itemName, quantity: 1});
