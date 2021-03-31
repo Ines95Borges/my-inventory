@@ -10,8 +10,8 @@ const Section = (props) => {
     sections,
     inputSection,
     setInputDatalist,
-    setSelectedId,
     setSelectedSection,
+    selectedSection,
   } = props;
 
 
@@ -30,14 +30,19 @@ const Section = (props) => {
   }
 
   function handleDeleteSection(e){
-    const sectionName = e.target.parentElement.childNodes[1].value;
-    setSections(sections.filter(section => section.name !== sectionName));
-    inputDatalist.current.value = "";
+    if(selectedSection[0]){
+      const sectionName = selectedSection[0].name;
+      setSections(sections.filter(section => section.name !== sectionName));
+      setSelectedSection([]);
+      inputDatalist.current.value = "";
+    }
   }
 
   function handleInputDatalistValue(){
-    setInputDatalist(inputDatalist.current.value);
-    setSelectedSection(sections.filter(section => section.name === inputDatalist.current.value))
+    if(selectedSection[0]){
+      setInputDatalist(inputDatalist.current.value);
+      setSelectedSection(sections.filter(section => section.name === inputDatalist.current.value))
+    }
   };
 
   return (
@@ -66,8 +71,7 @@ const Section = (props) => {
         autoComplete="on"
       />
       <datalist id="sections">
-        {console.log(sections)}
-        {sections.map(section => {
+        {sections && sections.map(section => {
           return <option 
             key={section.id} 
           >
