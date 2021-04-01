@@ -13,6 +13,7 @@
 body{
   background-color: var(--secondary-1);
   padding: 10vh 20vw 10px 20vw;
+  overflow-x: hidden;
 }
 
 header{
@@ -43,6 +44,8 @@ header{
 
 .export-container{
   margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 input[type="file"]{

@@ -45,7 +45,6 @@ function App() {
       localStorage.setItem("sections", JSON.stringify([]));
     }else{
       var localSections = JSON.parse(localStorage.getItem("sections"));
-      console.log(localSections);
       setSections(localSections);
     }
   }
