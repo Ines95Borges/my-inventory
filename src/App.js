@@ -12,33 +12,6 @@ function App() {
   const [selectedId, setSelectedId] = useState("");
   const [selectedSection, setSelectedSection] = useState([]);
 
-  const saveLocalSections = () => {
-    localStorage.setItem("sections", JSON.stringify(sections));
-  }
-
-  const saveLocalName = () => {
-    localStorage.setItem("inventoryName", JSON.stringify(inputName));
-  }
-
-  const getLocalSections = () => {
-    if(localStorage.getItem("sections") === null){
-      localStorage.setItem("sections", JSON.stringify([]));
-    }else{
-      let localSections = JSON.parse(localStorage.getItem("sections"));
-      console.log(localSections);
-      setSections(localSections);
-    }
-  }
-
-  const getLocalName = () => {
-    if(localStorage.getItem("inventoryName") === null){
-      localStorage.setItem("inventoryName", JSON.stringify(""));
-    }else{
-      let localName = JSON.parse(localStorage.getItem("inventoryName"));
-      setSections(localName);
-    }
-  }
-
   useEffect(() => {
     getLocalSections();
     getLocalName();
@@ -59,17 +32,66 @@ function App() {
     }
   }, [selectedSection]);
 
+  const saveLocalSections = () => {
+    localStorage.setItem("sections", JSON.stringify(sections));
+  }
 
+  const saveLocalName = () => {
+    localStorage.setItem("inventoryName", JSON.stringify(inputName));
+  }
+
+  const getLocalSections = () => {
+    if(localStorage.getItem("sections") === null){
+      localStorage.setItem("sections", JSON.stringify([]));
+    }else{
+      var localSections = JSON.parse(localStorage.getItem("sections"));
+      console.log(localSections);
+      setSections(localSections);
+    }
+  }
+
+  const getLocalName = () => {
+    if(localStorage.getItem("inventoryName") === null){
+      localStorage.setItem("inventoryName", JSON.stringify(""));
+    }else{
+      var localName = JSON.parse(localStorage.getItem("inventoryName"));
+      setInputName(localName);
+    }
+  }
+
+  const exportJSON = (e) =>{
+    var str = JSON.stringify(sections);
+    var dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(str);
+    e.target.href = dataUri;
+  }
+
+  const importJSON = (e) => {
+    var file = e.target.files[0];
+    if (!file) {
+      return;
+    }
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var contents = e.target.result;
+      setSections(JSON.parse(contents))
+    };
+    reader.readAsText(file);
+  }
 
   return (
     <div className="App">
       <header>
         <div className="title">
           <h1><input 
+            value={inputName}
             type="text" 
             placeholder="Your name"
             onChange={(e) => setInputName(e.target.value)}
           /> inventory</h1>
+        </div>
+        <div className="export-container">
+          <input onClick={importJSON} type="file" placeholder="Import"/>
+          <a onClick={exportJSON} href="#" download="myInventory">Export</a>
         </div>
       </header>
       <main>

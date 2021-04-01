@@ -30,7 +30,7 @@ const Section = (props) => {
   }
 
   function handleDeleteSection(e){
-    if(inputDatalist){
+    if(inputDatalist.current.value){
       const sectionName = selectedSection[0].name;
       setSections(sections.filter(section => section.name !== sectionName));
       setSelectedSection([]);
@@ -39,7 +39,7 @@ const Section = (props) => {
   }
 
   function handleInputDatalistValue(){
-    if(inputDatalist){
+    if(inputDatalist.current.value){
       setInputDatalist(inputDatalist.current.value);
       setSelectedSection(sections.filter(section => section.name === inputDatalist.current.value))
     }
