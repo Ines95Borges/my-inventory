@@ -79,6 +79,7 @@ input[type="file"]{
   border: 2px solid var(--primary);
   border-radius: 500px;
   padding: 10px;
+  justify-content: space-between;
 }
 
 .submit-section-container #input-section{
@@ -88,6 +89,7 @@ input[type="file"]{
   font-size: 1.4rem;
   padding: 0 10px;
   color: var(--primary);
+  min-width: 30px;
 }
 .submit-section-container #input-section:focus{
   outline: 0;
