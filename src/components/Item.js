@@ -21,7 +21,7 @@ const Item = ({item, sections, inputDatalist, setSections}) => {
     const newSections = [...sections];
     const newSection = newSections.filter(section => section.name === inputDatalist);
     let selectedItem = newSection[0].list.filter(listItem => listItem.text === itemText.current.innerHTML);
-    if(selectedItem[0].quantity > 1 || value !== -1) selectedItem[0].quantity += value;
+    if(selectedItem[0].quantity > 0 || value !== -1) selectedItem[0].quantity += value;
     const listIndex = newSection[0].list.findIndex(listItem => listItem.id === selectedItem[0].id);
     newSection[0].list[listIndex] = selectedItem[0];
 
